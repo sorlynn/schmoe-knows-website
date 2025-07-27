@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schmoe Knows - Dog Sitting Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Teal -->
+    <!-- Application Structure Plan: A single-page, top-to-bottom scrolling layout that acts as a narrative journey for the user. It starts with immediate brand identity (Hero), explains the offerings (Services), builds trust (Why Us), and ends with a clear call to action (Contact). This structure was chosen to logically guide a potential client from initial interest to conversion, directly translating the business card's purpose into a more detailed, interactive digital format that is easy to navigate on any device. -->
+    <!-- Visualization & Content Choices: Report Info: Business card concept -> Goal: Create an interactive digital presence. | Hero Section (Inform) -> HTML/CSS for brand identity -> No interaction needed for immediate clarity. | Services (Organize/Inform) -> Interactive HTML/CSS grid -> JS toggle on click to reveal details, encouraging exploration without initial clutter. | Why Us (Inform) -> Styled HTML list -> Simple static content for trust-building. | Contact (Action) -> HTML buttons -> Clear, direct calls-to-action. All icons are built with HTML/CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .paw-pad {
+            width: 30px;
+            height: 28px;
+            background-color: currentColor;
+            border-radius: 60% 60% 40% 40%;
+        }
+        .paw-toe {
+            width: 15px;
+            height: 14px;
+            background-color: currentColor;
+            border-radius: 50%;
+        }
+        .service-card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .service-card.active .service-card-details {
+            max-height: 500px; /* Adjust as needed based on content */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-zinc-800">
+
+    <div id="app" class="max-w-7xl mx-auto">
+
+        <header class="p-4 md:p-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 text-teal-600">
+                <div class="relative w-10 h-10 flex justify-center items-end">
+                    <div class="paw-pad"></div>
+                    <div class="paw-toe absolute top-0 left-0"></div>
+                    <div class="paw-toe absolute top-1 right-0"></div>
+                    <div class="paw-toe absolute top-5 -left-2 transform -rotate-45"></div>
+                    <div class="paw-toe absolute top-5 -right-2 transform rotate-45"></div>
+                </div>
+                <span class="text-xl font-bold text-zinc-800">Schmoe Knows</span>
+            </a>
+            <a href="#contact" class="bg-teal-500 text-white font-bold py-2 px-6 rounded-full hover:bg-teal-600 transition-colors">
+                Contact
+            </a>
+        </header>
+
+        <main>
+            <section id="hero" class="text-center py-20 md:py-32 px-4">
+                <h1 class="text-4xl md:text-6xl font-bold">
+                    <span class="text-teal-600">Schmoe Knows</span> Your Dog
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto">Your Trusted Dog Sitting Service. Where every paw knows comfort and every owner finds peace of mind.</p>
+                <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
+                    <a href="tel:555-123-4567" class="flex items-center gap-2 text-lg font-semibold text-zinc-700 hover:text-teal-600 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        555-123-4567
+                    </a>
+                    <a href="mailto:info@schmoeknows.com" class="flex items-center gap-2 text-lg font-semibold text-zinc-700 hover:text-teal-600 transition-colors">
+                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        info@schmoeknows.com
+                    </a>
+                </div>
+            </section>
+
+            <section id="services" class="py-16 md:py-24 bg-white">
+                <div class="max-w-5xl mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold">Our Services</h2>
+                        <p class="mt-2 text-zinc-600 max-w-xl mx-auto">We offer a range of services to keep your furry friend happy, healthy, and safe. Click on a service to learn more.</p>
+                    </div>
+                    <div id="service-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        
+                        <div class="service-card bg-amber-50 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-shadow duration-300" data-service="walks">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-teal-100 text-teal-600 p-3 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-bold">Daily Walks</h3>
+                            </div>
+                            <div class="service-card-details text-zinc-600">
+                                <p>Energizing walks tailored to your dog's pace and stamina. We ensure they get the exercise and mental stimulation they need to stay happy and healthy, exploring local parks and trails.</p>
+                            </div>
+                        </div>
+
+                        <div class="service-card bg-amber-50 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-shadow duration-300" data-service="stays">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-teal-100 text-teal-600 p-3 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-bold">Overnight Stays</h3>
+                            </div>
+                            <div class="service-card-details text-zinc-600">
+                                <p>Loving, in-home care while you're away. We maintain your dog's routine in the comfort of their own environment, minimizing stress and providing constant companionship.</p>
+                            </div>
+                        </div>
+
+                        <div class="service-card bg-amber-50 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-shadow duration-300" data-service="playtime">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-teal-100 text-teal-600 p-3 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-bold">Feeding & Playtime</h3>
+                            </div>
+                            <div class="service-card-details text-zinc-600">
+                                <p>Scheduled feeding and dedicated playtime to keep your dog engaged and happy. We accommodate all dietary needs and love a good game of fetch or tug-of-war!</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="why-us" class="py-16 md:py-24">
+                <div class="max-w-5xl mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold">Happy Paws, Happy Owners</h2>
+                        <p class="mt-2 text-zinc-600 max-w-xl mx-auto">We're more than just sitters; we're passionate animal lovers dedicated to providing the best care.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 text-lg">
+                        <div class="flex items-start gap-4">
+                            <div class="text-teal-500 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Reliable & Loving Care</h4>
+                                <p class="text-zinc-600">You can count on us to be there, providing the affectionate and responsible care your dog deserves.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-teal-500 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Pet First Aid Certified</h4>
+                                <p class="text-zinc-600">Your pet's safety is our top priority. We are trained and certified in pet first aid and CPR.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-teal-500 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Flexible Scheduling</h4>
+                                <p class="text-zinc-600">We work with your schedule to provide convenient and consistent care for your beloved dog.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-teal-500 mt-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M17 20v-2c0-.134.01-.267.03-.4H17zm0 0v-2c0-.134.01-.267.03-.4H17zm0 0v-2c0-.134.01-.267.03-.4H17zM7 12v-2c0-.134.01-.267.03-.4H7zm0 0v-2c0-.134.01-.267.03-.4H7zm0 0v-2c0-.134.01-.267.03-.4H7zM7 12a4 4 0 110-8 4 4 0 010 8zm0 0H3a2 2 0 00-2 2v4h6v-4a2 2 0 00-2-2zM17 12a4 4 0 110-8 4 4 0 010 8zm0 0H13a2 2 0 00-2 2v4h6v-4a2 2 0 00-2-2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Personalized Attention</h4>
+                                <p class="text-zinc-600">Every dog is unique, and so is our care. We tailor our services to meet your dog's individual needs and personality.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="py-16 md:py-24 bg-teal-600 text-white text-center">
+                <div class="max-w-3xl mx-auto px-4">
+                    <h2 class="text-3xl md:text-4xl font-bold">Ready to Book?</h2>
+                    <p class="mt-4 text-lg md:text-xl">Let's chat about your dog's needs. We're excited to meet your furry family member!</p>
+                    <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="tel:555-123-4567" class="bg-white text-teal-600 font-bold py-3 px-8 rounded-full hover:bg-teal-50 transition-colors flex items-center justify-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            Call Us Now
+                        </a>
+                        <a href="mailto:info@schmoeknows.com" class="bg-teal-700 text-white font-bold py-3 px-8 rounded-full hover:bg-teal-800 transition-colors flex items-center justify-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            Email Us
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-8 px-4 text-zinc-600 text-sm">
+            &copy; 2025 Schmoe Knows. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceCards = document.querySelectorAll('.service-card');
+
+            serviceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
